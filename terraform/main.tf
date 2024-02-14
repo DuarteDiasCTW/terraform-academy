@@ -29,7 +29,7 @@ resource "azurerm_public_ip" "my_terraform_public_ip" {
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
-  domain_name_label   =  "umnomealeatorio"
+  domain_name_label   =  "my-domain-name-rftm"
 }
 
 # Create Network Security Group and rule
@@ -75,7 +75,7 @@ resource "azurerm_network_security_group" "my_terraform_nsg" {
 
 #Create Network Interface
 resource "azurerm_network_interface" "my_terraform_nic" {
-  name                = "NIC-BRO"
+  name                = "network-interface"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
 
@@ -102,7 +102,7 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
   size                  = "Standard_DS1_v2"
 
   os_disk {
-    name                 = "myOsDisk"
+    name                 = "myDisk-rftm"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
@@ -118,7 +118,7 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
   admin_username = "ctwacademy"
 
   admin_ssh_key {
-    username   = ctwacademy
+    username   = "ctwacademy"
     public_key = file("../resources/id_rsa.pub")
   }
 }
