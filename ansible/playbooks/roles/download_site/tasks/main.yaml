@@ -1,0 +1,28 @@
+---
+# Task to download the zip file containing the website
+- name: Download the website zip file
+  get_url:
+    url: https://github.com/PauloGDPeixoto/ctw-academy/blob/main/resources/html_demo_site-main.zip
+    dest: /tmp/site.zip  # Temporary location to store the downloaded file
+    mode: '0644'
+
+# Task to ensure the target directory for the website exists
+- name: Ensure web directory exists
+  file:
+    path: {{ document_root }}
+    state: directory
+    mode: '0755'
+
+# Task to unzip the website archive
+- name: Unzip the website
+  unarchive:
+    src: /tmp/site.zip
+    dest: /var/www/html  # The root directory of your web server
+    remote_src: yes
+    creates: /var/www/html/html_demo_site-main/index.html  # Replace with a path/file you expect to exist after unzipping
+
+# Clean up the zip file after extraction
+- name: Remove the downloaded zip file
+  file:
+    path: /tmp/site.zip
+    state: absent

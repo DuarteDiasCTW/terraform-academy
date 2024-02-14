@@ -6,3 +6,10 @@
   become: true
   tags:
     - skip_ansible_lint
+
+- name: Update apt cache and install unzip
+  become: true
+  apt:
+    name: unzip
+    update_cache: yes
+    state: present
