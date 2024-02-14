@@ -1,1 +1,2 @@
-document_root:
+document_root: /var/www/html
+temp_dest_folder: /tmp

@@ -1,0 +1,11 @@
+- name: Download the file
+  get_url:
+    url: https://github.com/DuarteDiasCTW/terraform-academy/blob/main/resources/html_demo_site-main.zip
+    dest: '{{ temp_dest_folder }}/'
+
+
+- name: Extract file
+  unarchive:
+    src:  '{{ temp_dest_folder }}/html_demo_site-main.zip'
+    dest: '/var/www/html'
+    remote_src: true

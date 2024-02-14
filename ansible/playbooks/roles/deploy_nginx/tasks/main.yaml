@@ -3,3 +3,21 @@
     name: nginx
     state: latest
     update_cache: yes
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Apply Nginx template
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx
+
+- name: Enable new website
+  file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+  notify: Restart Nginx
