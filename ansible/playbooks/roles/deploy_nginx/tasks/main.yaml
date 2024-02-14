@@ -3,11 +3,6 @@
     name: nginx
     state: latest
     update_cache: yes
-- name: start nginx
-  service:
-    name: nginx
-    state: started
-    enabled: yes
 
 - name: Apply Nginx template
   template:

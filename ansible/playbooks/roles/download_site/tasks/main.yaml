@@ -1,11 +1,16 @@
 - name: Download the file
-  get_url:
-    url: https://github.com/DuarteDiasCTW/terraform-academy/blob/main/resources/html_demo_site-main.zip
-    dest: '{{ temp_dest_folder }}/'
+  copy:
+    src: /home/tldart/Documents/Projects/terraform-academy/resources/html_demo_site-main.zip
+    dest: /tmp/
+
 
 
 - name: Extract file
   unarchive:
-    src:  '{{ temp_dest_folder }}/html_demo_site-main.zip'
-    dest: '/var/www/html'
+    src:  /tmp/html_demo_site-main.zip
+    dest: /var/www/html
     remote_src: true
+    mode: '0755'
+    owner: 'www-data'
+    group: 'www-data'
+    
