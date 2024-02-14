@@ -25,6 +25,6 @@ variable "arm_tenant_id" {
 variable "username" {
   type      = string
   description = "Name of the VM username"
-  default = "admeme"
+  default = "ctwacademy"
 
 }
