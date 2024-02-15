@@ -29,7 +29,7 @@ resource "azurerm_public_ip" "my_terraform_public_ip" {
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
-  domain_name_label   =  "my-domain-name-rftm"
+  domain_name_label   =  "my-domain-name-rm"
 }
 
 # Create Network Security Group and rule
@@ -86,8 +86,8 @@ resource "azurerm_network_security_group" "my_terraform_nsg" {
 }
 
 #Create Network Interface
-resource "azurerm_network_interface" "my_terraform_nic" {
-  name                = "network-interface"
+resource "azurerm_network_interface" "my_terraform_ni_rm" {
+  name                = "network-interface-rm"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
 
@@ -101,7 +101,7 @@ resource "azurerm_network_interface" "my_terraform_nic" {
 
 # Connect h the security group to the network interface
 resource "azurerm_network_interface_security_group_association" "example" {
-  network_interface_id      = azurerm_network_interface.my_terraform_nic.id
+  network_interface_id      = azurerm_network_interface.my_terraform_ni_rm.id
   network_security_group_id = azurerm_network_security_group.my_terraform_nsg.id
 }
 
@@ -110,7 +110,7 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
   name                  = "myVM${random_string.number.result}"
   location              = var.resource_group_location
   resource_group_name   = var.resource_group_name
-  network_interface_ids = [azurerm_network_interface.my_terraform_nic.id]
+  network_interface_ids = [azurerm_network_interface.my_terraform_ni_rm.id]
   size                  = "Standard_DS1_v2"
 
   os_disk {
